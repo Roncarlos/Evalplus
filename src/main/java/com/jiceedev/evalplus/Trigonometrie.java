@@ -15,20 +15,20 @@ public class Trigonometrie extends NoeudUnaire{
 		return "Trigo("+ node +")";
 	}
 	
-	public double cos(double x) {
-		return getValueCos(x);
+	public double cos() {
+		return getValueCos(getNoeud().execute());
 	}
 	
-	public double sin(double x) {
-		return getValueSin(x);
+	public double sin() {
+		return getValueSin(getNoeud().execute());
 	}
 	
-	public double log(double x) {
-		return getValueLog(x);
+	public double log() {
+		return getValueLog(getNoeud().execute());
 	}
 	
-	public double exp(double x) {
-		return getValueExp(x);
+	public double exp() {
+		return getValueExp(getNoeud().execute());
 	}
 	
 	
@@ -50,5 +50,4 @@ public class Trigonometrie extends NoeudUnaire{
 	}
 	
 	
-
 }

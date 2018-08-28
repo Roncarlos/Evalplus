@@ -1,14 +1,15 @@
 package eval;
 
-public class Valeur implements Noeud {
+class Variable implements Noeud {
 	private double Val;
 	
-	public Valeur(double v){
-		Val=v;
-	}
 	
 	public double getV(){
 		return Val;
+	}
+	
+	public String toString() {
+		return "x";
 	}
 
 	
@@ -17,3 +18,23 @@ public class Valeur implements Noeud {
 	}
 
 }
+
+class Constante implements Noeud {
+	private double val;
+
+	public Constante(double value) {
+		val = value;
+	}
+
+	@Override
+	public double execute() {
+		return val;
+	}
+
+	public String toString() {
+		return Double.toString(val);
+	}
+}
+
+
+
