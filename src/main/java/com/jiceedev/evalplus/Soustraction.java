@@ -1,4 +1,4 @@
-package eval;
+package com.jiceedev.evalplus;
 
 public class Soustraction extends NoeudBinaire{
 	public Soustraction(Noeud fg, Noeud fd) {

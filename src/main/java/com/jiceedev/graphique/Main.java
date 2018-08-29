@@ -1,6 +1,7 @@
-package graphique;
+package com.jiceedev.graphique;
 
 import javax.swing.JFrame;
+
 
 public class Main {
 

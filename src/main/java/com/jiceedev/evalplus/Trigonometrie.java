@@ -1,4 +1,4 @@
-package evalplus;
+package com.jiceedev.evalplus;
 
 public class Trigonometrie extends NoeudUnaire{
 	Noeud node;

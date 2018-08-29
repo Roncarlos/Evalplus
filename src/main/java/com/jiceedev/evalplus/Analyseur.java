@@ -1,4 +1,4 @@
-package evalplus;
+package com.jiceedev.evalplus;
 
 import java.io.IOException;
 import java.io.StreamTokenizer;
@@ -19,7 +19,7 @@ public class Analyseur {
 		Noeud result = analyserExpression();
 		if(buffer.ttype != StreamTokenizer.TT_EOF)
 			throw new SyntaxErrorException("Unexpected character at end of text.");
-		
+			
 		return result;
 	}
 	

@@ -1,4 +1,4 @@
-package evalplus;
+package com.jiceedev.evalplus;
 
 class Variable implements Noeud {
 	private double Val;

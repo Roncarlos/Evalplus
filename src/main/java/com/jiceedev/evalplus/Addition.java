@@ -1,4 +1,4 @@
-package eval;
+package com.jiceedev.evalplus;
 
 public class Addition extends NoeudBinaire{
 	
