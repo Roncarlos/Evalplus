@@ -1,22 +1,22 @@
-package graphique;
+package com.jiceedev.graphique;
 
 import java.awt.BorderLayout;
-import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import eval.Analyseur;
-import eval.Noeud;
+import com.jiceedev.evalplus.Analyseur;
+import com.jiceedev.evalplus.Noeud;
+import com.jiceedev.graphique.Canvas;
 
 public class MainFenetre extends JFrame{
 	
@@ -88,7 +88,7 @@ public class MainFenetre extends JFrame{
 		west.add(but, BorderLayout.CENTER);
 		
 		// 2_Container du CENTER
-		mycanvas = new Canvas();
+		mycanvas = new Canvas(this);
 		
 		// 3_Container du SOUTH
 		JPanel sud = new JPanel();
@@ -128,10 +128,20 @@ public class MainFenetre extends JFrame{
 			try {
 				valeurParametres[0] = Double.parseDouble(txmin.getText());
 				valeurParametres[1] = Double.parseDouble(txmax.getText());
-				valeurParametres[2] = Double.parseDouble(tymin.getText());
-				valeurParametres[3] = Double.parseDouble(tymax.getText());
-				valeurParametres[4] = Double.parseDouble(tdeltax.getText());
+				valeurParametres[2] = Double.parseDouble(tdeltax.getText());
+
+				valeurParametres[3] = Double.parseDouble(tymin.getText());
+				valeurParametres[4] = Double.parseDouble(tymax.getText());
 				valeurParametres[5] = Double.parseDouble(tdeltay.getText());
+
+				/* Debug
+				valeurParametres[0] = 0f; //xMin
+				valeurParametres[1] = 100f; //xMax
+				valeurParametres[2] = 10f; //detalX
+				valeurParametres[3] = 0f; //yMin
+				valeurParametres[4] = 100f; // yMax
+				valeurParametres[5] = 10f; // deltaY
+				*/
 				
 				Analyseur analyseur = new Analyseur(texp.getText());
 				noeud = analyseur.analyser();
