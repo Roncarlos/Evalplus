@@ -19,8 +19,6 @@ public class EvalPanel extends JPanel {
         group = new JPanel();
         fx = new JTextField();
 
-        fx.setEditable(false);
-
         fxLabel = new JLabel("f(x) = ", SwingConstants.RIGHT);
 
         evalBtn = new JButton("Eval");
@@ -51,6 +49,16 @@ public class EvalPanel extends JPanel {
         evalBtn.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.8)));
         fxLabel.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.4)));
         fx.setPreferredSize(new Dimension((int) (getWidth() * 0.15), (int) (getHeight() * 0.4)));
+    }
+
+
+    public void setAllBackgroundColor(Color color) {
+        setBackground(color);
+        for(Component c : getComponents()){
+            if(!(c instanceof JButton)) {
+                c.setBackground(color);
+            }
+        }
     }
 
 }

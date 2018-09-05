@@ -64,4 +64,13 @@ public class PositionPanel extends JPanel {
         y.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.4)));
         fx.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.4)));
     }
+
+    public void setAllBackgroundColor(Color color) {
+        setBackground(color);
+        for(Component c : getComponents()){
+            if(!(c instanceof JButton)) {
+                c.setBackground(color);
+            }
+        }
+    }
 }

@@ -41,7 +41,6 @@ public class ActionPanel extends JPanel {
 
         textFields = new JPanel();
         textFields.setLayout(new GridBagLayout());
-        //setBackground(Color.BLUE);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
@@ -133,6 +132,15 @@ public class ActionPanel extends JPanel {
     void reactToResize(int w, int h) {
         setPreferredSize(new Dimension((int) (w * 0.15), (int) (h * .90)));
         textFields.setPreferredSize(new Dimension((int) (getWidth() * 0.95), (int) (getHeight() * 0.50)));
+    }
+
+    public void setAllBackgroundColor(Color color) {
+        setBackground(color);
+        for(Component c : getComponents()){
+            if(!(c instanceof JButton)) {
+                c.setBackground(color);
+            }
+        }
     }
 
 

@@ -8,6 +8,7 @@ public class MainUI extends JFrame {
     private ActionPanel actionPanel;
     private PositionPanel positionPanel;
     private EvalPanel evalPanel;
+    private Graph graph;
 
     public MainUI() {
         super();
@@ -22,9 +23,12 @@ public class MainUI extends JFrame {
         actionPanel = new ActionPanel();
         positionPanel = new PositionPanel();
         evalPanel = new EvalPanel();
+        graph = new Graph(this);
+
         add(actionPanel, BorderLayout.WEST);
         add(positionPanel, BorderLayout.NORTH);
         add(evalPanel, BorderLayout.SOUTH);
+        add(graph, BorderLayout.CENTER);
 
 
         setLocationRelativeTo(null);
@@ -32,6 +36,10 @@ public class MainUI extends JFrame {
         actionPanel.reactToResize((int) width, (int) height);
         positionPanel.reactToResize((int) width, (int) height);
         evalPanel.reactToResize((int) width, (int) height);
+
+        actionPanel.setAllBackgroundColor(Color.lightGray);
+        positionPanel.setAllBackgroundColor(Color.lightGray);
+        evalPanel.setAllBackgroundColor(Color.lightGray);
 
 
         addComponentListener(new ComponentAdapter() {
