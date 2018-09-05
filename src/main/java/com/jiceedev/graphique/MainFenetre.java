@@ -14,8 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.jiceedev.evalplus.Analyseur;
-import com.jiceedev.evalplus.Noeud;
+import com.jiceedev.evalplus.arithmetics.*;
 import com.jiceedev.graphique.Canvas;
 
 public class MainFenetre extends JFrame{

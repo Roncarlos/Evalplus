@@ -7,7 +7,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import com.jiceedev.evalplus.Noeud;
+import com.jiceedev.evalplus.arithmetics.*;
 
 
 public class Canvas extends JPanel{
@@ -100,13 +100,12 @@ public class Canvas extends JPanel{
 			int xp = 0, yp = 0;
 
 
-
             for (double x = xMin; x <= xMax; x += dx) {
 				double y = expr.execute();
                 int xc = (int) (Ax * x + Bx);
                 int yc = (int) (Ay * y + By);
                 if (xc != 0)
-                    g.drawLine(xp, yp, xc, yc);
+					g.drawLine(xp, yp, xc, yc);
                 xp = xc;
 				yp = yc;
             }
