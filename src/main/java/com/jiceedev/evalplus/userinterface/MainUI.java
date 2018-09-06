@@ -1,14 +1,21 @@
 package com.jiceedev.evalplus.userinterface;
 
+import com.jiceedev.evalplus.arithmetics.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class MainUI extends JFrame {
+
     private ActionPanel actionPanel;
     private PositionPanel positionPanel;
     private EvalPanel evalPanel;
     private Graph graph;
+
+    private Fonction fonction;
+
+
 
     public MainUI() {
         super();
@@ -20,9 +27,9 @@ public class MainUI extends JFrame {
         double width 			= screenSize.getWidth();
         double height 			= screenSize.getHeight();
 
-        actionPanel = new ActionPanel();
+        actionPanel = new ActionPanel(this);
         positionPanel = new PositionPanel();
-        evalPanel = new EvalPanel();
+        evalPanel = new EvalPanel(this);
         graph = new Graph(this);
 
         add(actionPanel, BorderLayout.WEST);
@@ -60,4 +67,36 @@ public class MainUI extends JFrame {
         setVisible(true);
 
     }
+
+    void prepareFunction() throws Exception {
+        try {
+            Analyseur analyseur = new Analyseur(evalPanel.getExpresion());
+            fonction = analyseur.analyser();
+            graph.repaint();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public ActionPanel getActionPanel() {
+        return actionPanel;
+    }
+
+    public PositionPanel getPositionPanel() {
+        return positionPanel;
+    }
+
+    public EvalPanel getEvalPanel() {
+        return evalPanel;
+    }
+
+    public Fonction getFonction() {
+        return fonction;
+    }
+
+    public Graph getGraph() {
+        return graph;
+    }
+
+
 }

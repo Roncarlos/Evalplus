@@ -1,9 +1,10 @@
 package com.jiceedev.evalplus.userinterface;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ActionPanel extends JPanel {
 
@@ -12,11 +13,16 @@ public class ActionPanel extends JPanel {
     public JPanel textFields, pmButtons;
     private JButton refreshBtn, minusBtn, plusBtn;
     private JCheckBox autoPas;
+    MainUI mainUI;
 
-    ActionPanel() {
+    ActionPanel(MainUI mainUI) {
         super();
+        this.mainUI = mainUI;
         initInterface();
+        initListeners();
+        loadDefaultValues();
     }
+
 
     private void initInterface() {
 
@@ -36,6 +42,7 @@ public class ActionPanel extends JPanel {
         xGrid = new JTextField();
         yGridLabel = new JLabel("y grid", SwingConstants.LEFT);
         yGrid = new JTextField();
+
 
 
 
@@ -124,14 +131,55 @@ public class ActionPanel extends JPanel {
         c2.gridy = 3;
         add(autoPas, c2);
 
+    }
 
+    private void initListeners() {
+        plusBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoom();
+            }
+        });
 
+        minusBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dezoom();
+            }
+        });
 
+        refreshBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refresh();
+            }
+        });
     }
 
     void reactToResize(int w, int h) {
         setPreferredSize(new Dimension((int) (w * 0.15), (int) (h * .90)));
         textFields.setPreferredSize(new Dimension((int) (getWidth() * 0.95), (int) (getHeight() * 0.50)));
+    }
+
+    private void dezoom() {
+        xMin.setText(String.valueOf(getxMin() * 2));
+        xMax.setText(String.valueOf(getxMax() * 2));
+        yMin.setText(String.valueOf(getyMin() * 2));
+        yMax.setText(String.valueOf(getyMax() * 2));
+        mainUI.getGraph().repaint();
+    }
+
+    private void zoom() {
+        xMin.setText(String.valueOf(getxMin() / 2));
+        xMax.setText(String.valueOf(getxMax() / 2));
+        yMin.setText(String.valueOf(getyMin() / 2));
+        yMax.setText(String.valueOf(getyMax() / 2));
+        mainUI.getGraph().repaint();
+    }
+
+    private void refresh() {
+        //loadDefaultValues();
+        mainUI.getGraph().repaint();
     }
 
     public void setAllBackgroundColor(Color color) {
@@ -143,32 +191,76 @@ public class ActionPanel extends JPanel {
         }
     }
 
+    void loadDefaultValues() {
+        xMin.setText("-100");
+        xMax.setText("100");
 
-    public String getxMin() {
-        return xMin.getText();
+        yMin.setText("-100");
+        yMax.setText("100");
+
+        pas.setText("1");
+
+        xGrid.setText("5");
+        yGrid.setText("5");
+
     }
 
-    public String getxMax() {
-        return xMax.getText();
+
+
+    public double getxMin() {
+        try {
+            return Double.parseDouble(xMin.getText());
+        } catch(Exception e) {
+            return -100.0f;
+        }
     }
 
-    public String getyMin() {
-        return yMin.getText();
+    public double getxMax() {
+        try {
+            return Double.parseDouble(xMax.getText());
+        } catch(Exception e) {
+            return 100.0f;
+        }
     }
 
-    public String getyMax() {
-        return yMax.getText();
+    public double getyMin() {
+        try {
+            return Double.parseDouble(yMin.getText());
+        } catch(Exception e) {
+            return -100.0f;
+        }
     }
 
-    public String getPas() {
-        return pas.getText();
+    public double getyMax() {
+        try {
+            return Double.parseDouble(yMax.getText());
+        } catch(Exception e) {
+            return 100.0f;
+        }
     }
 
-    public String getxGrid() {
-        return xGrid.getText();
+    public double getPas() {
+        try {
+            double dPas = Double.parseDouble(pas.getText());
+            return dPas > 0.00f ? dPas : 1.00f;
+        } catch(Exception e) {
+            return 1.0f;
+        }
     }
 
-    public String getyGrid() {
-        return yGrid.getText();
+    public double getxGrid() {
+        try {
+            return Double.parseDouble(xGrid.getText());
+        } catch(Exception e) {
+            return 5.0f;
+        }
+    }
+
+    public double getyGrid() {
+        try {
+            return Double.parseDouble(yGrid.getText());
+        } catch(Exception e) {
+            return 5.0f;
+        }
     }
 }

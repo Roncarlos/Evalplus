@@ -2,6 +2,8 @@ package com.jiceedev.evalplus.userinterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EvalPanel extends JPanel {
 
@@ -9,12 +11,16 @@ public class EvalPanel extends JPanel {
     JLabel fxLabel;
     JTextField fx;
     JPanel group;
+    MainUI mainUI;
 
-    EvalPanel() {
+    EvalPanel(MainUI mainUI) {
+        this.mainUI = mainUI;
         initInterface();
+        initListeners();
+
     }
 
-    void initInterface() {
+    private void initInterface() {
         //setBackground(Color.ORANGE);
         group = new JPanel();
         fx = new JTextField();
@@ -44,11 +50,29 @@ public class EvalPanel extends JPanel {
         add(group, BorderLayout.WEST);
     }
 
+    private void initListeners() {
+        evalBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    mainUI.prepareFunction();
+                } catch (Exception ex) {
+                    String msg = "Exception est  "+ ex;
+                    JOptionPane.showMessageDialog(null,msg,"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+
     void reactToResize(int w, int h) {
         setPreferredSize(new Dimension(w, (int) (h * .05)));
         evalBtn.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.8)));
         fxLabel.setPreferredSize(new Dimension((int) (getWidth() * 0.05), (int) (getHeight() * 0.4)));
         fx.setPreferredSize(new Dimension((int) (getWidth() * 0.15), (int) (getHeight() * 0.4)));
+    }
+
+    public String getExpresion() {
+        return fx.getText();
     }
 
 
